@@ -1,0 +1,13 @@
+{
+  "name": "linkedin-agent",
+  "description": "Twelve Claude skills that run a LinkedIn account: posts off 21 hook formulas, comments, replies, profile score, weekly plan, DMs, inbox triage, carousels, repurposing, audits, a humanizer that strips the AI fingerprint and scores the draft, and a publish step that posts or schedules the approved draft to LinkedIn through Blotato.",
+  "version": "1.1.0",
+  "author": {
+    "name": "Ness Alazne",
+    "url": "https://builds.digicuratoragency.com"
+  },
+  "homepage": "https://github.com/nessalazne/linkedin-agent-skill",
+  "repository": "https://github.com/nessalazne/linkedin-agent-skill",
+  "license": "MIT",
+  "keywords": ["linkedin", "content", "writing", "humanizer", "social", "marketing", "blotato"]
+}
