@@ -138,7 +138,7 @@ The last stretch to PASS is the part the script deliberately leaves to you.
 ## Publishing
 
 `/li-publish` is the one skill that sends anything. It uses
-[Blotato](https://blotato.com), which is an approved LinkedIn partner, so the
+[Blotato](https://blotato.com/?ref=ness), which is an approved LinkedIn partner, so the
 post goes through LinkedIn's own partner API rather than a browser pretending
 to be you. It needs two lines in `~/.claude/linkedin/.env`:
 
