@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "linkedin-agent-skill",
+  "description": "The LinkedIn agent skill pack for Claude, Ness edition",
+  "owner": {
+    "name": "Ness Alazne",
+    "url": "https://builds.digicuratoragency.com"
+  },
+  "plugins": [
+    {
+      "name": "linkedin-agent",
+      "description": "Twelve Claude skills that run a LinkedIn account, including a humanizer that strips the AI fingerprint and a publish step that posts through Blotato.",
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/nessalazne/linkedin-agent-skill"
+    }
+  ]
+}
