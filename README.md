@@ -1,8 +1,10 @@
 # The LinkedIn agent skill (Ness edition)
 
-Twelve Claude skills that run a LinkedIn account. Eleven of them write, and
-they need no signup, no API key, nothing to connect. The twelfth posts, through
-Blotato, and only after you have said "publish".
+Fifteen Claude skills that run a LinkedIn account. Fourteen of them write or
+read, and they need no signup, no API key, nothing to connect. The fifteenth
+posts, through Blotato, and only after you have said "publish". Two of them can
+also fetch posts from LinkedIn through Apify if you give them a key, instead of
+asking you to paste.
 
 Forked from Jake Schincariol's
 [linkedin-agent-skill](https://github.com/Jakeschincariol/linkedin-agent-skill)
@@ -55,7 +57,7 @@ Then spend ten minutes on `templates/voice.md`. Copy it to
 into Claude and say "write my voice.md from these". Every skill reads that
 file. Skip it and everything comes out sounding like everyone else.
 
-## The twelve
+## The fifteen
 
 | command | what it does |
 | --- | --- |
@@ -71,6 +73,9 @@ file. Skip it and everything comes out sounding like everyone else.
 | `/li-inbox` | Triages the inbox into lead / recruiter / peer / ask / spam, and tells you which tell gave the sequence away. |
 | `/li-audit` | Post-mortem on what you have already published. Ranks by engagement rate and reach multiple, not impressions. |
 | `/li-publish` | Posts or schedules the approved draft to LinkedIn through Blotato. Asks for the word "publish" first, polls until it is live, prints the URL. See below. |
+| `/li-interview` | Interviews you and keeps the answers in a Story Bank: real numbers, dated moments, scars, positions. Or five questions on one topic that end in a post spine for `/li-post`. For when every draft comes back with `{{your number}}`. |
+| `/li-hooks` | Takes apart a post that did well: which of the 21 formulas it uses, how it is built, why it worked, a blank template for your topic, and which of its AI tells not to copy. |
+| `/li-engagers` | Who liked and commented on a post, sorted into prospect / peer / aspirational / other against your audience, then three short lists: follow back, comment on, DM. |
 
 ## The humanizer
 
@@ -166,6 +171,28 @@ URL. Every send is appended to `~/.claude/linkedin/log.md`.
 The script needs Python 3 and the `requests` package. Nothing else is
 uploaded anywhere; your draft goes to Blotato and from there to LinkedIn.
 
+## Reading LinkedIn (optional)
+
+`/li-engagers` and `/li-hooks` work on text you paste. If you would rather
+paste a URL, add an [Apify](https://apify.com) token to the same
+`~/.claude/linkedin/.env`:
+
+```
+APIFY_TOKEN=apify_api_...
+```
+
+```bash
+python3 skills/li-engagers/fetch.py --check                     # is the token good?
+python3 skills/li-engagers/fetch.py post URL                    # one post's text and stats
+python3 skills/li-engagers/fetch.py engagers URL --dry-run      # the runs and the cost, nothing sent
+python3 skills/li-engagers/fetch.py engagers URL1 URL2 --max 150  # several posts, one row per person
+```
+
+It uses public, no-cookie actors, so your LinkedIn login is never involved.
+It is pay-per-use: about $1 per 1,000 posts and $5 per 1,000 engagers, and
+Apify's free tier includes $5 a month. The skill shows the estimate first and
+asks before any run over 100 people. `fetch.py` is standard library only.
+
 ## The fine print, which is the honest part
 
 **The writing skills do not post to LinkedIn, and they should not.** There is
@@ -203,6 +230,9 @@ skills/li-human/humanize.py      the three cleaning passes
 skills/li-human/detect.py        the five-check panel
 skills/li-profile/rubric.json    the 100-point profile score
 skills/li-publish/publish.py     the Blotato sender: check, dry run, post, schedule, poll
+skills/li-engagers/fetch.py      the optional Apify reader: posts and engagers, dry run, dedupe
+skills/li-hooks/features.md      what you can see in a post, mapped to the 21 formulas
+skills/li-interview/story-bank.md  the Story Bank template, copied to ~/.claude/linkedin/ on first use
 templates/voice.md               your voice profile. Fill this in first.
 ```
 
@@ -217,6 +247,12 @@ templates/voice.md               your voice profile. Fill this in first.
 - `/li-post`, `/li-plan`, `/li-repurpose`, `/li-carousel`: one line each
   pointing at `/li-publish` after the user's yes. Nothing else in those
   skills changed.
+- `/li-interview`, `/li-hooks`, `/li-engagers`: three new skills, adapted
+  from Serge Bulaev's [linkedin-skills](https://github.com/sergebulaev/linkedin-skills)
+  (MIT) and rewritten for this pack. `/li-hooks` classifies against this
+  pack's own 21 formulas. The Story Bank lives in `~/.claude/linkedin/`, not
+  in the repo, so it can't be pushed by accident. No existing skill was
+  changed to add them.
 - Plugin manifests and this README.
 
 ## Credit
@@ -224,7 +260,9 @@ templates/voice.md               your voice profile. Fill this in first.
 Original pack by Jake Schincariol, [opusjake.ai](https://opusjake.ai). The
 full write-up is at
 [opusjake.ai/r/linkedin-agent](https://opusjake.ai/r/linkedin-agent).
-This edition is maintained by Ness Alazne,
+`/li-interview`, `/li-hooks` and `/li-engagers` are adapted from Serge
+Bulaev's [linkedin-skills](https://github.com/sergebulaev/linkedin-skills)
+(MIT). This edition is maintained by Ness Alazne,
 [builds.digicuratoragency.com](https://builds.digicuratoragency.com).
 
 ## License

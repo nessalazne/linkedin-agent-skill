@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "linkedin-agent",
-      "description": "Twelve Claude skills that run a LinkedIn account, including a humanizer that strips the AI fingerprint and a publish step that posts through Blotato.",
+      "description": "Fifteen Claude skills that run a LinkedIn account, including a Story Bank interviewer, a hook extractor, engager analytics, a humanizer that strips the AI fingerprint and a publish step that posts through Blotato.",
       "source": "./",
       "category": "productivity",
       "homepage": "https://github.com/nessalazne/linkedin-agent-skill"
