@@ -6,10 +6,6 @@ posts, through Blotato, and only after you have said "publish". Two of them can
 also fetch posts from LinkedIn through Apify if you give them a key, instead of
 asking you to paste.
 
-Forked from Jake Schincariol's
-[linkedin-agent-skill](https://github.com/Jakeschincariol/linkedin-agent-skill)
-(MIT). What changed in this edition is at the bottom.
-
 One of them writes your posts off 21 hook formulas. One comments on other
 people's posts. One handles the replies under yours. One scores your profile
 out of 100 and rewrites what lost points. One plans the week: what to post,
